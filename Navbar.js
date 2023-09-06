@@ -13,7 +13,13 @@ export default function Navbar(props) {
         setText(event.target.value);
     }
 
-    const [text,setText] = useState("write something here!") // this setText is an updated value of text.
+    function clear_it(e){
+        text = ""; //if text is const then this line will be an error
+        setText(text);
+    }
+
+    let [text,setText] = useState("") // this setText is an updated value of text and it's a function.
+
   return (
     <>
     <div>
@@ -22,8 +28,18 @@ export default function Navbar(props) {
   <textarea className="form-control" id="exampleFormControlTextarea1" rows="10" value={text} onChange = {changing_func}></textarea>
 </div>
     </div>
-    <div className="button here">
-        <button className = "btn btn-primary" onClick={func1}>Click Here to convert to uppercase {props.current_action}</button>
+    <div className="button here flex">
+        <button className = "btn btn-primary mx-3" onClick={func1}>Click Here to convert to uppercase {props.current_action}</button> 
+        <button className = "btn btn-primary mx-3" onClick={clear_it}>Clear the text area{props.current_action}</button>
+    </div>
+
+    <div className="summary my-5">
+        <p><h2>Your Text Summary</h2></p>
+        <p> Number of words are: {text.length === 0 ? 0 : text.split(" ").length} and number of characters are: {text.length}</p>
+    </div>
+    <div>
+        <h2>Preview</h2>
+        <p>{text}</p>
     </div>
     </>
   )
