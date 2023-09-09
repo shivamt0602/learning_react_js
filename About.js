@@ -2,25 +2,34 @@ import React,{useState} from 'react'
 //basically to change anything dynamically we use states!!!
 export default function About() {
 
-  let myStyle = {
+  const[myStyle,updated_style] = useState({
     color : 'black',
     backgroundColor : 'white'
-  }
+  }) 
 
-  let toggle = () => {
+  const[og_text , new_text] = useState('enable Dark Mode');
+
+
+  let toggle = () =>{
     if(myStyle.backgroundColor == 'black'){
-      myStyle.color = 'black'
-      myStyle.backgroundColor = 'white'
+      updated_style({
+        color : 'black',
+        backgroundColor : 'white' 
+      })
+      new_text("Enable Dark Mode")
     }
     else{
-      myStyle.color = 'white'
-      myStyle.backgroundColor = 'black'
+      updated_style({
+        color : 'white',
+        backgroundColor : 'black' 
+      })
+      new_text("Enable Light Mode")
     }
   }
 
   return (
     <>
-     <div className='Container' style={myStyle}>
+     <div className='Container' style={myStyle} my-3 mx-3>
       <div class="accordion" id="accordionExample">
   <div class="accordion-item">
     <h2 class="accordion-header">
@@ -61,7 +70,7 @@ export default function About() {
 </div>
     </div>
     <div className='button-class my-3'>
-    <button type="button" class="btn btn-primary" onClick={toggle}>Primary</button>
+    <button type="button" class="btn btn-primary" onClick={toggle}>{og_text}</button>
     </div>
     </>
    
